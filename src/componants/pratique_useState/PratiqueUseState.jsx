@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const TaskList = () => {
+const PratiqueUseState = () => {
     const [textList, setTextList] = useState("");
     const [todo, setTodo] = useState([]);
 
@@ -9,25 +9,33 @@ const TaskList = () => {
     }
 
     const ajoutAuTableau = () => {
-        if(textList.trim() ==! ""){
+        if(textList){
+            console.log(textList);
             setTodo([...todo, textList]);
+            setTextList("");
         }
     }
+
+    useEffect(() => {
+        console.log(todo);
+      }, [todo]);
 
 
   return (
     <div>
-        <input type="search" value={textList} onChange={handleTaskChange} placeholder='Search'  />
-        <button onChange = {handleClick}>Ajouter</button>
+        <input type="text" value={textList} onChange={handleTaskChange} placeholder='Search'/>
+        <button onClick={ajoutAuTableau}>Ajouter</button>
         <ul>
-            {todo.map((todo, index)=>{
-                <li>{todo}</li>
-            })}
+            {todo.map((tod, index) => (
+                <li key={index}>{tod}</li>
+            ))}
         </ul>
     </div>
   );
 };
 
-export default TaskList;
+export default PratiqueUseState;
+
+
 
 
